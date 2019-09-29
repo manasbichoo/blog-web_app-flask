@@ -6,6 +6,10 @@ from flaskblog import app, db, bcrypt
 from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
+import pandas as pd
+import urllib.request
+import sqlite3
+from bs4 import BeautifulSoup as bs
 
 
 @app.route("/")
@@ -142,3 +146,59 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('home'))
+
+
+
+    ##################################################
+@app.route("/project", methods=['GET', 'POST'])
+@login_required
+def project():
+    conn = sqlite3.connect(r"E:\COLLEGE PROJECTS\collegeproject\example.db")
+    if request.method == 'POST': 
+        result = request.form["URL"]
+        
+        
+
+        df = {'Projects':[],'Link':[],'Language':[],'Name':[]}
+
+        inputurl=result
+        url=inputurl+'?tab=repositories'
+        content = urllib.request.urlopen(url).read()
+        soup = bs(content,'html.parser')
+
+        for tag in soup.find_all('a',attrs={'itemprop':'name codeRepository'}):
+            df['Projects'].append(str(tag.text))
+                
+        for link in soup.find_all('a',attrs={'itemprop':'name codeRepository'}):
+            df['Link'].append('https://github.com'+str(link.get('href')))
+        
+        nm=soup.find('span', attrs={'class':'p-name vcard-fullname d-block overflow-hidden'})
+        name=nm.text
+
+        for div in soup.find_all('div', attrs={'class':'col-10 col-lg-9 d-inline-block'}):
+            x=div.find('span',attrs={'itemprop':'programmingLanguage'})
+            if x is None:
+                df['Language'].append('None')
+                df['Name'].append(name)
+            else:
+                df['Language'].append(x.text)
+                df['Name'].append(name)
+       
+        df1=pd.DataFrame(df)
+        
+        #Database
+        cur = conn.cursor()
+        df1.to_sql('Projects', conn,if_exists='append', index=False)
+        df2=pd.read_sql('select * from Projects', conn) 
+        #pd.read_sql('select * from Projects', conn)
+        conn.commit()
+        conn.close()
+
+        return render_template('index.html',result=url, table = df2.to_html()) # renders template: index.html with argument result = polarity value calculated
+    else:
+        conn = sqlite3.connect(r"E:\COLLEGE PROJECTS\collegeproject\example.db")
+        cur = conn.cursor()
+        df3=pd.read_sql('select * from Projects', conn) 
+        conn.commit()
+        conn.close()
+        return render_template('index.html', table = df3.to_html())    

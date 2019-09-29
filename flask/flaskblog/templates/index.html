@@ -1,0 +1,19 @@
+{%extends "layout.html"%}
+{% block content%}
+<h2>ENTER YOUR PROJECT LINK</h2>
+
+<form action="/project" method = "POST">
+  Project Link:<br>
+  <input type="text" name="URL">
+  <br>
+  
+  <input type="submit" value="Submit">
+</form> 
+
+<h2>LINK: {{ result }}</h2>
+
+<div class=page>
+  <h1>Project Table</h1>
+  {{ table|safe }}
+</div>
+{%endblock content%}
