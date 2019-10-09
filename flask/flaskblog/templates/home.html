@@ -1,5 +1,6 @@
 {%extends "layout.html"%}
 {% block content%}
+<h1> POSTS </h1>
 {%for post in posts%}
 <article class="media content-section">
   <img class="rounded-circle article-img" src="{{url_for('static', filename='profile_pics/'+post.author.image_file)}}">
@@ -10,6 +11,21 @@
     </div>
     <h2><a class="article-title" href="{{url_for('post', post_id=post.id)}}">{{ post.title }}</a></h2>
     <p class="article-content">{{ post.content }}</p>
+  </div>
+</article>
+{%endfor%}
+<h1> PROJECTS:</h1>
+{%for project in projects%}
+<article class="media content-section">
+  
+  <div class="media-body">
+    <div class="article-metadata">
+      
+      TITLE:<h2>{{ project.title }}</h2>
+    </div>
+    BY:</br><a class="mr-2" href="/account">{{ project.author}}</a></br>
+    URL:<p class="article-content"><a href={{ project.url }}>{{project.url}}</a></p>
+    LANGUAGE:<p class="article-content">{{ project.language }}</p>
   </div>
 </article>
 {%endfor%}

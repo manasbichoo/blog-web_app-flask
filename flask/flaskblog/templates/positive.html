@@ -1,0 +1,13 @@
+{%extends "layout.html"%}
+{% block content%}
+<h1>Hello {{user}}</h1>
+<h2> Your sentiment score is </h2>
+{{blob_sentiment}}
+</br>
+</br>
+
+  <img src= {{url}} alt="Chart" height="500" width="500"/>
+</br>
+<h2>Keywords</h2>
+ <img src= {{url1}} alt="Chart" height="500" width="500"/>
+{%endblock content%}

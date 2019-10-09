@@ -1,5 +1,5 @@
-{%extends "layout.html"%}
-{% block content%}
+{% extends "layout.html" %}
+{% block content %}
 <h2>ENTER YOUR PROJECT LINK</h2>
 
 <form action="/project" method = "POST">
@@ -16,4 +16,5 @@
   <h1>Project Table</h1>
   {{ table|safe }}
 </div>
-{%endblock content%}
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{%extends "layout.html"%}
+{% block content%}
+
+
+<div class="container">
+	<div class="jumbotron text-center">
+		<h3>FEEDBACK FORM</h3>
+		<p>Sentiment Analyser</p>
+	</div>
+</div>
+
+	<form method="POST" action="{{ url_for('analyse')}}" id="myForm">
+		
+		<div class="radio">
+											<h4>Computer Lab :-</h4>
+											<label><input   name="ac" id="ac1" value=0.5 type="radio" >Satisfied</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input aria-required="true"  name="ac" id="ac2" value=-0.5 type="radio">Dissatisfied</label><br>
+											<label><input   name="ac" id="ac3" value=1 type="radio" >Very Satisfied
+											</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input   name="ac" id="ac4" value=-1 type="radio" >Very Dissatisfied</label>
+										</div><hr>
+
+        <div class="radio">
+											<h4>Library :-</h4>
+											<label><input   name="ac2" id="ac1" value=0.5 type="radio" >Satisfied</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input aria-required="true"  name="ac2" id="ac2" value=-0.5 type="radio">Dissatisfied</label><br>
+											<label><input   name="ac2" id="ac3" value=1 type="radio" >Very Satisfied
+											</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input   name="ac2" id="ac4" value=-1 type="radio" >Very Dissatisfied</label>
+										</div><hr>
+        
+        <div class="radio">
+											<h4>Faculty and Staff :-</h4>
+											<label><input   name="ac3" id="ac1" value=0.5 type="radio" >Satisfied</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input aria-required="true"  name="ac3" id="ac2" value=-0.5 type="radio">Dissatisfied</label><br>
+											<label><input   name="ac3" id="ac3" value=1 type="radio" >Very Satisfied
+											</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input   name="ac3" id="ac4" value=-1 type="radio" >Very Dissatisfied</label>
+								</div><hr>
+
+		<div class="radio">
+											<h4>Cleanliness:-</h4>
+											<label><input   name="ac4" id="ac1" value=0.5 type="radio" >Satisfied</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input aria-required="true"  name="ac4" id="ac2" value=-0.5 type="radio">Dissatisfied</label><br>
+											<label><input   name="ac4" id="ac3" value=1 type="radio" >Very Satisfied
+											</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+											<label><input   name="ac4" id="ac4" value=-1 type="radio" >Very Dissatisfied</label>
+										</div><hr>
+									</br>
+		<label >FEEDBACK:</label>
+    <textarea class="form-control" rows="3" cols="2" name="rawtext"></textarea>
+</br>
+    <input type="submit" value="Submit" class="btn btn-primary ">
+    
+
+    <a href="{{ url_for('analyse')}}" type="button" class="btn btn-danger" > Reset</a>
+    
+	</form>
+	
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+{%endblock content%}

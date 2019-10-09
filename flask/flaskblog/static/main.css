@@ -135,3 +135,7 @@ tr:nth-child(odd)   { background-color:#eee; }
 tr:nth-child(even)  { background-color:#fff; }
 
 tr:hover            { background-color: #ffff99;}
+
+.table table-striped table-dark{
+      color: red;
+    }
