@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>ENTER YOUR PROJECT LINK</h2>
+
+<form action="/projectdb" method = "POST">
+  Project Link:<br>
+  <input type="text" name="URL">
+  <br>
+  
+  <input type="submit" value="Submit">
+</form> 
+
+<h2>LINK: {{ result }}</h2>
+
+<h1> PROJECTS:</h1>
+{%for project in projects%}
+<article class="media content-section">
+  
+  <div class="media-body">
+    <div class="article-metadata">
+      
+      TITLE:<h2>{{ project.title }}</h2>
+    </div>
+    BY:</br><a class="mr-2" href="/account">{{ project.author}}</a></br>
+    URL:<p class="article-content"><a href={{ project.url }}>{{project.url}}</a></p>
+    LANGUAGE:<p class="article-content">{{ project.language }}</p>
+  </div>
+</article>
+{%endfor%}
+
+{% endblock content %}

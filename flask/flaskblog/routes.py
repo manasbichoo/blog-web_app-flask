@@ -282,3 +282,59 @@ def analyse():
         return render_template('feedback.html')
 
 
+#####################################TEST sql-project###################
+@app.route("/projectdb", methods=['GET', 'POST'])
+@login_required
+def projectdb():
+    if request.method == 'POST': 
+        result = request.form["URL"]
+        inputurl=result
+        url=inputurl+'?tab=repositories'
+        df = {'Projects':[],'Link':[],'Language':[],'Name':[]}
+        p=[]
+        l=[]
+        ln=[]
+        n=[]
+        
+        content = urllib.request.urlopen(url).read()
+        soup = bs(content,'html.parser')
+
+        for tag in soup.find_all('a',attrs={'itemprop':'name codeRepository'}):
+            df['Projects'].append(str(tag.text))
+            p.append(str(tag.text))
+                
+        for link in soup.find_all('a',attrs={'itemprop':'name codeRepository'}):
+            df['Link'].append('https://github.com'+str(link.get('href')))
+            l.append('https://github.com'+str(link.get('href')))
+        
+        nm=soup.find('span', attrs={'class':'p-name vcard-fullname d-block overflow-hidden'})
+        name=nm.text
+
+        for div in soup.find_all('div', attrs={'class':'col-10 col-lg-9 d-inline-block'}):
+            x=div.find('span',attrs={'itemprop':'programmingLanguage'})
+            if x is None:
+                df['Language'].append('None')
+                df['Name'].append(name)
+                ln.append('None')
+                n.append(name)
+            else:
+                df['Language'].append(str(x.text))
+                df['Name'].append(name)
+                n.append(name)
+                ln.append(str(x.test))
+       
+        df1=pd.DataFrame(df)
+        
+        #Database
+        project = Project(title=p,url=l,language=ln, author=n)
+        db.session.add(project)
+        db.session.commit()
+        flash('Your project has been created!', 'success')
+        projects = Project.query.all()
+        return render_template('indextest.html', title='New Project', projects=projects,
+                            legend='New Project')
+    else:
+        return render_template('indextest.html')
+
+        
+        

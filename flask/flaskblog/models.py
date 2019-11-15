@@ -32,7 +32,7 @@ class Post(db.Model):
 
 class Project(db.Model):
     title = db.Column(db.String(100), nullable=False)
-    url= db.Column(db.String(100), primary_key=True, nullable=False)
+    url= db.Column(db.String(100),primary_key=True, nullable=False)
     language = db.Column(db.String(100), nullable=False)
     author= db.Column(db.String(100), nullable=False)
     def __repr__(self):
