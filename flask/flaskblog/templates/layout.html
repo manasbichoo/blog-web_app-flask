@@ -1,57 +1,171 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
 <head>
 
-<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
-
-	{%if title %}
+    <!--- basic page needs
+   ================================================== -->
+    <meta charset="utf-8">
+    <meta name="description" content="Manas Bichoo Personal website" />
+    <meta name="keywords" content="indore,, job, web design" />
+    <meta name="author" content="Manas Bichoo" />
+    <meta name="google-site-verification" content="0e75-VwaqN5FEq06g4S0sJ5JVbV6OK5WShoxiy2Y2Fk" />
+    {%if title %}
 	<title>Flask Blog -  {{title}} </title>
 	{%else%}
 	<title>Flask Blog</title>
 	{%endif%}
 
+    <!-- mobile specific metas
+   ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+   ================================================== -->
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/base.css') }}">
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/vendor.css') }}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- script
+   ================================================== -->
+   <script src="{{url_for('static', filename='js/modernizr.js')}}"></script>
+   <script src="{{url_for('static', filename='js/pace.min.js')}}"></script>
+    <!--Angular-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <!--<script src="https://code.angularjs.org/1.6.2/angular-route.min.js"></script>-->
+   <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+    <!-- favicons
+	================================================== -->
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='logo.png')}}">
+        <!-- Hotjar Tracking Code for www.mrinaljain.com -->
+        <script>
+            (function (h, o, t, j, a, r) {
+                h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+                h._hjSettings = { hjid: 1102284, hjsv: 6 };
+                a = o.getElementsByTagName('head')[0];
+                r = o.createElement('script'); r.async = 1;
+                r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+        </script>
 </head>
-<body>
-<header class="site-header">
-  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-	<div class="container">
-	  <a class="navbar-brand mr-4" href="/">Flask Blog</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarToggle">
-		<div class="navbar-nav mr-auto">
-		  <a class="nav-item nav-link" href="{{url_for('home')}}">Home</a>
-		  <a class="nav-item nav-link" href="{{url_for('about')}}">About</a>
-		</div>
-		<!-- Navbar Right Side -->
-		<div class="navbar-nav">
-			{% if current_user.is_authenticated %}
-			   <a class="nav-item nav-link" href="{{url_for('new_post')}}">New Post</a>
-			   <a class="nav-item nav-link" href="{{url_for('project')}}">Projects</a>
-			   <a class="nav-item nav-link" href="{{url_for('account')}}">Account</a>
-		       <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>
-		       <a class="nav-item nav-link" href="{{url_for('projecttest')}}">Add Project Test</a>
-		       <a class="nav-item nav-link" href="{{url_for('analyse')}}">Feedback</a>
+
+<body id="top" ng-app="myApp">
+
+    <!-- header================================================== -->
+    <header>
+        <div class="row">
+
+            <div class="top-bar">
+                <a class="menu-toggle" href="#"><span>Menu</span></a>
+
+                <div class="logo" ng-controller="MainController">
+                    <a href="index.html">Menu</a>
+                </div>
+
+                <nav id="main-nav-wrap">
+                    <ul class="main-navigation">
+                        <li><a class="nav-item nav-link" href="{{url_for('home')}}">Home</a></li>
+		                <li><a class="nav-item nav-link" href="{{url_for('about')}}">About</a></li>
+                     	{% if current_user.is_authenticated %}
+			            <li><a class="nav-item nav-link" href="{{url_for('new_post')}}">New Post</a></li>
+			   <li><a class="nav-item nav-link" href="{{url_for('project')}}">Projects</a></li>
+			  <li> <a class="nav-item nav-link" href="{{url_for('account')}}">Account</a></li>
+		     <li>  <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a></li>
 			{% else %}
-		       <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a>
-		       <a class="nav-item nav-link" href="{{url_for('register')}}">Register</a>
+		      <li> <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a></li>
+		     <li>  <a class="nav-item nav-link" href="{{url_for('register')}}">Register</a> </li>
 		    {%endif%}
-		</div>
-	  </div>
-	</div>
-  </nav>
-</header>
-<main role="main" class="container">
+                    </ul>
+                </nav>
+            </div>
+            <!-- /top-bar -->
+
+        </div>
+        <!-- /row -->
+    </header>
+    <!-- /header -->
+
+
+    <!-- intro section
+   ================================================== -->
+    <section id="intro">
+
+        <div class="intro-overlay"></div>
+
+        <div class="intro-content">
+            <div class="row">
+
+                <div class="col-twelve">
+
+                  
+                   <h1> Welcome ! </h1>
+               </br>
+               {%if title %}
+	<a class="button stroke smoothscroll" href="#about" title="">{{title}} </a>
+	{%else%}
+	<a class="button stroke smoothscroll" href="#about" title="">EXPLORE BLOGS AND PROJECTS</a>
+	{%endif%}
+
+                    
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /intro-content -->
+
+        <ul class="intro-social">
+            <li><a target="_blank" href="https://www.facebook.com/manasb07"><i class="fa fa-facebook"></i></a></li>
+            <li><a target="_blank" href="https://twitter.com/_archman_"><i class="fa fa-twitter"></i></a></li>
+            
+            <li><a target="_blank" href="https://www.instagram.com/_archman_/"><i class="fa fa-instagram"></i></a></li>
+            <li><a target="_blank" href="https://www.linkedin.com/in/manas-bichoo-7bba23131/"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+        <!-- /intro-social -->
+
+    </section>
+    <!-- /intro -->
+
+
+    <!-- about section
+   ================================================== -->
+    <section id="about">
+
+        <div class="row section-intro">
+            <div class="col-six">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Top Banner -->
+                <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-1222422410254597" data-ad-slot="9932624482"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+
+                </script>
+            </div>
+            <div class="col-six">
+                <script type="text/javascript">
+                    google_ad_client = "ca-pub-1222422410254597";
+                    google_ad_slot = "1555618621";
+                    google_ad_width = 728;
+                    google_ad_height = 90;
+
+                </script>
+                <!-- fix two -->
+                <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+
+
+                </script>
+            </div>
+
+ <main role="main" class="container">
   <div class="row">
-	<div class="col-md-7">
+	<div class="col-md-8">
 	  {% with messages = get_flashed_messages(with_categories=true) %}
 	   {%if messages%}
 		{% for category, message in messages%}
@@ -66,10 +180,203 @@
 	</div>
   </div>
 </main>
+        
+        <section id="resume">        <div class="row button-section">
+            <div class="col-twelve">
+                <a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
+                <a href="Manas's Resume.pdf" title="Download CV" class="button button-primary">Download CV</a>
+            </div>
+        </div> </section>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    </section>
+
+     
+    <!-- /process-->
+
+    <section id="contact">
+
+        <div class="row section-intro">
+            <div class="col-twelve">
+
+                <h5>Contact</h5>
+                <h1>We'd Love To Hear From You.</h1>
+
+                <!--<p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>-->
+            </div>
+        </div>
+
+        <!--
+   	<div class="row contact-form">
+
+   		<div class="col-twelve">
+
+            
+            <form name="contactForm" id="contactForm" method="post" action="">
+      			<fieldset>
+
+                  <div class="form-field">
+ 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
+                  </div>
+                  <div class="form-field">
+	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
+	               </div>
+                  <div class="form-field">
+	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
+	               </div>                       
+                  <div class="form-field">
+	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
+	               </div>                      
+                 <div class="form-field">
+                     <button class="submitform">Submit</button>
+                     <div id="submit-loader">
+                        <div class="text-loader">Sending...</div>                             
+       				      <div class="s-loader">
+								  	<div class="bounce1"></div>
+								  	<div class="bounce2"></div>
+								  	<div class="bounce3"></div>
+								</div>
+							</div>
+                  </div>
+
+      			</fieldset>
+      		</form> 
+
+            
+            <div id="message-warning">            	
+            </div>            
+            
+      		<div id="message-success">
+               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+      		</div>
+
+         </div>
+   		
+   	</div>
+		-->
+
+    </section>
+
+
+    <!-- footer
+   ================================================== -->
+
+    <footer id="contact">
+        <div class="row contact-info">
+
+       
+
+            <div class="col-four tab-full collapse">
+
+                <div class="icon">
+                    <i class="icon-mail"></i>
+                </div>
+
+                <h5>Email Us At</h5>
+
+                <p>manas16b@gmail.com<br> 
+                </p>
+
+            </div>
+
+            <div class="col-four tab-full">
+
+                <div class="icon">
+                    <i class="icon-phone"></i>
+                </div>
+
+                <h5>Call Us At</h5>
+
+                <p>Mobile: (+91) 7898344353<br> 
+
+                </p>
+
+            </div>
+
+               <div class="col-four tab-full">
+
+                <div class="icon">
+                    <i class="icon-phone"></i>
+                </div>
+
+                <h5>Meet Us At</h5>
+
+                <p>IIPS-DAVV, Indore<br> 
+
+                </p>
+
+           
+
+        </div>
+        <!-- /contact-info -->
+         </div>
+
+               <div class="row">
+               </br>
+               </br>
+               </br>
+               </br>
+
+            <div class="col-six tab-full pull-right social">
+
+                <ul class="footer-social">
+                    
+            <li><a target="_blank" href="https://www.facebook.com/manasb07"><i class="fa fa-facebook"></i></a></li>
+            <li><a target="_blank" href="https://twitter.com/_archman_"><i class="fa fa-twitter"></i></a></li>
+            
+            <li><a target="_blank" href="https://www.instagram.com/_archman_/"><i class="fa fa-instagram"></i></a></li>
+            <li><a target="_blank" href="https://www.linkedin.com/in/manas-bichoo-7bba23131/"><i class="fa fa-linkedin"></i></a></li>
+        
+                </ul>
+
+            </div>
+     
+
+            <div class="col-six tab-full">
+                <div class="copyright">
+                
+                    <span>Copyright: Manas Bichoo 2019</span>
+                
+                    <span>Designd by: <a href="https://www.linkedin.com/in/manas-bichoo-7bba23131/">Manas Bichoo</a></span>
+                
+                </div>
+            </div>
+
+            <div id="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
+            </div>
+
+        </div>
+        <!-- /row -->
+
+    </footer>
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script
+   ================================================== -->
+   <script src="{{url_for('static', filename='js/jquery-2.1.3.min.js')}}"></script>
+   <script src="{{url_for('static', filename='js/plugins.js')}}"></script>
+   <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    
+
+    <!-- mrinal_one -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77809126-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-77809126-1');
+</script>
+
 </body>
+
 </html>
