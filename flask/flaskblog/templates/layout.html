@@ -15,9 +15,9 @@
     <meta name="author" content="Manas Bichoo" />
     <meta name="google-site-verification" content="0e75-VwaqN5FEq06g4S0sJ5JVbV6OK5WShoxiy2Y2Fk" />
     {%if title %}
-	<title>Flask Blog -  {{title}} </title>
+	<title>Project Bank and Feedback Analysis -  {{title}} </title>
 	{%else%}
-	<title>Flask Blog</title>
+	<title>Project Bank and Feedback Analysis</title>
 	{%endif%}
 
     <!-- mobile specific metas
@@ -74,10 +74,13 @@
                         <li><a class="nav-item nav-link" href="{{url_for('home')}}">Home</a></li>
 		                <li><a class="nav-item nav-link" href="{{url_for('about')}}">About</a></li>
                      	{% if current_user.is_authenticated %}
-			            <li><a class="nav-item nav-link" href="{{url_for('new_post')}}">New Post</a></li>
-			   <li><a class="nav-item nav-link" href="{{url_for('project')}}">Projects</a></li>
-			  <li> <a class="nav-item nav-link" href="{{url_for('account')}}">Account</a></li>
-		     <li>  <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a></li>
+			            <li><a class="nav-item nav-link" href="{{url_for('new_post')}}">Add Blog Post</a></li>
+			   <li><a class="nav-item nav-link" href="{{url_for('project')}}">Projects Scraper</a></li>
+			  
+		     <li><a class="nav-item nav-link" href="{{url_for('projecttest')}}">Add Custom Project</a></li>
+           <li><a class="nav-item nav-link" href="{{url_for('analyse')}}">Feedback</a></li>
+           <li> <a class="nav-item nav-link" href="{{url_for('account')}}">Account</a></li>
+           <li>  <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a></li>
 			{% else %}
 		      <li> <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a></li>
 		     <li>  <a class="nav-item nav-link" href="{{url_for('register')}}">Register</a> </li>
@@ -181,12 +184,7 @@
   </div>
 </main>
         
-        <section id="resume">        <div class="row button-section">
-            <div class="col-twelve">
-                <a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
-                <a href="Manas's Resume.pdf" title="Download CV" class="button button-primary">Download CV</a>
-            </div>
-        </div> </section>
+      
 
 
 
